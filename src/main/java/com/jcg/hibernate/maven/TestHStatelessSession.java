@@ -1,5 +1,8 @@
 package com.jcg.hibernate.maven;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -115,12 +118,28 @@ public class TestHStatelessSession {
 				System.out.println("=== tuple error 1 ===");
 				e2.printStackTrace();
 			}
-			System.out.println("=== tuple 2 : อ่านเข้า tuple ใช้ hqlString และดึงบางฟิลด์ ===");
+			
+			System.out.println("=== tuple 2 : อ่านเข้า tuple ใช้ hqlString และดึงบางฟิลด์ และอ่านเข้า List<Map<String,Object>>  ===");
 			//ต้องใส่ as ต่อจากฟิลด์ด้วย เช่น as userid เป็นต้น
 			try (Stream<Tuple> rst = hss.getSession().createSelectionQuery("select u.userid as userid, u.username as username from User u", Tuple.class).getResultStream();) {
-				rst.forEach((record) -> {
-					System.out.println(record.get("userid", Integer.class) + "," + record.get("username", String.class));
-				});
+				//แสดง
+				//rst.forEach((record) -> {
+				//	System.out.println(record.get("userid", Integer.class) + "," + record.get("username", String.class));
+				//});
+				
+				//นำเข้า map
+				List<Map<String,Object>> list = rst.map(tp -> {
+					Map<String,Object> map = new HashMap<>();
+		            map.put("userid", tp.get("userid"));
+		            map.put("username", tp.get("username"));
+		            return map;
+				}).toList();
+				if (list.size() > 0) {
+					for (Map<String, Object> map : list) {
+						System.out.println(map.get("userid") + "," + map.get("username"));
+					}
+				}
+				
 			} catch (Exception e2) {
 				System.out.println("=== tuple error 2===");
 				e2.printStackTrace();
