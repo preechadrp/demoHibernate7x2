@@ -1,0 +1,4 @@
+-Hibernate 7.2.x
+-ใช้ hibernate-hikaricp เป็นตัวสร้าง pool
+-java 21
+
