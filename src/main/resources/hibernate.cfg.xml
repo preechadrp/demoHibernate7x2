@@ -73,6 +73,8 @@ https://www.digitalocean.com/community/tutorials/hibernate-sessionfactory
 		<!-- และถ้าใช้ native query เยอะ -->
 		<!-- <property name="hibernate.query.native.ignore_jdbc_parameters">true</property>
 		 -->
-
+		 
+		<!-- Mapping With Model Class Containing Annotations -->
+		<!-- <mapping class="com.jcg.hibernate.maven.model.User"  /> --> 
 	</session-factory>
 </hibernate-configuration>
