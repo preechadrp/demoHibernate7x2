@@ -59,7 +59,7 @@ public class TestHStatelessSession {
 				
 			}
 
-			System.out.println("\n.......Records Saved Successfully To The Database.......\n");
+			System.out.println("\n.......Insert Successfully To The Database.......\n");
 
 			testReadInTrans(hss);// อ่านมาแสดงก่อน commite ได้เมื่อใช้ StatelessSession //test ok 29/6/66
 
