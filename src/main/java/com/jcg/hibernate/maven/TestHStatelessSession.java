@@ -109,11 +109,25 @@ public class TestHStatelessSession {
 			}
 			
 			System.out.println("=== start read to tuple ===");
-			System.out.println("=== tuple 1 : อ่านเข้า tuple ใช้ NativeQuery ===");
+			System.out.println("=== tuple 1 : อ่านเข้า tuple ใช้ NativeQuery และอ่านเข้า List<Map<String,Object>> ===");
 			try (Stream<Tuple> rst = hss.getSession().createNativeQuery("select * from user_table", Tuple.class).getResultStream();) {
-				rst.forEach((record) -> {
-					System.out.println(record.get("user_id", Integer.class) + "," + record.get("user_name", String.class));
-				});
+				//แสดง
+				//rst.forEach((record) -> {
+				//	System.out.println(record.get("user_id", Integer.class) + "," + record.get("user_name", String.class));
+				//});
+				
+				//นำเข้า map
+				List<Map<String,Object>> list = rst.map(tp -> {
+					Map<String,Object> map = new HashMap<>();
+		            map.put("user_id", tp.get("user_id"));
+		            map.put("user_name", tp.get("user_name"));
+		            return map;
+				}).toList();
+				if (list.size() > 0) {
+					for (Map<String, Object> map : list) {
+						System.out.println(map.get("user_id") + "," + map.get("user_name"));
+					}
+				}
 			} catch (Exception e2) {
 				System.out.println("=== tuple error 1 ===");
 				e2.printStackTrace();
