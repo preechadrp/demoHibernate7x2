@@ -34,7 +34,7 @@ https://www.digitalocean.com/community/tutorials/hibernate-sessionfactory
 	    <property name="hibernate.connection.password">masterkey</property>
 	    
 	    <!-- สำคัญมาก -->
-        <property name="hibernate.jdbc.time_zone">UTC</property>
+        <!--<property name="hibernate.jdbc.time_zone">UTC</property>-->
 
 		<!-- Specifying Session Context -->
 		<!-- ดูเพิ่มเติม https://docs.jboss.org/hibernate/stable/core.old/reference/en/html/architecture-current-session.html -->

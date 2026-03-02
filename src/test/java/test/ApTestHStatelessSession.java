@@ -12,7 +12,7 @@ public class ApTestHStatelessSession {
 		
 	@Test
 	@Order(1)
-	public void F00testInsert() throws Exception {
+	public void F00testDeleteAll() throws Exception {
 		TestHStatelessSession.testdeleteALL(); //test ผ่าน 29/6/66
 	}
 	
