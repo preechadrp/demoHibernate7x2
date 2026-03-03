@@ -38,6 +38,6 @@ public class User  {
 	private String createdBy;
 
 	@Column(name = "created_date")
-	private java.time.OffsetDateTime createdDate;
+	private java.time.LocalDateTime createdDate;//java.time.LocalDateTime กรณีต้องการเก็บวันเวลาเท่านั้น ,ถ้าต้องการเรื่อง timezone ด้วยให้ใช้ java.time.OffsetDateTime
 	
 }
