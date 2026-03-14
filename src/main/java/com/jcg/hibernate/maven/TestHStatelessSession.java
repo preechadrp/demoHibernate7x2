@@ -29,8 +29,7 @@ public class TestHStatelessSession {
 		System.out.println("======testInsert()");
 		
 		// ทดสอบ insert
-		try (HStatelessSession hss = HStatelessSession.sessionDb();) {
-			hss.begintrans();
+		try (HStatelessSession hss = HStatelessSession.sessionDb(true);) {
 
 			 // สร้าง ValidatorFactory และ Validator
 	        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -82,7 +81,7 @@ public class TestHStatelessSession {
 	public static void testRead() throws Exception {
 		System.out.println("======testRead()");
 		// ทดสอบอ่านข้อมูล
-		try (HStatelessSession hss = HStatelessSession.sessionDb();) {
+		try (HStatelessSession hss = HStatelessSession.sessionDb(false);) {
 
 			// test HQL/JPQL ผ่านแล้ว
 			System.out.println("=== createQuery , getResultStream ===");
@@ -168,8 +167,7 @@ public class TestHStatelessSession {
 	public static void testUpdate() throws Exception {
 		System.out.println("======testUpdate()");
 		// ทดสอบปรับปรุงข้อมูล
-		try (HStatelessSession hss = HStatelessSession.sessionDb();) {
-			hss.begintrans();
+		try (HStatelessSession hss = HStatelessSession.sessionDb(true);) {
 
 			// แบบที่ 1 ค้นหาด้วย key // test ผ่านแล้ว
 			User us1 = (User) hss.getSession().get(User.class, 304);
@@ -194,8 +192,7 @@ public class TestHStatelessSession {
 	public static void testClone() throws Exception {
 		System.out.println("======testClone()");
 		// ทดสอบ clone
-		try (HStatelessSession hss = HStatelessSession.sessionDb();) {
-			hss.begintrans();
+		try (HStatelessSession hss = HStatelessSession.sessionDb(true);) {
 
 			// test HQL/JPQL ผ่านแล้ว
 			Query<User> qr1 = hss.getSession().createQuery("from User where userid =:userid ", User.class);
@@ -220,8 +217,7 @@ public class TestHStatelessSession {
 	public static void testDelete() throws Exception {
 		System.out.println("======testDelete()");
 		// ทดสอบ ลบ
-		try (HStatelessSession hss = HStatelessSession.sessionDb();) {
-			hss.begintrans();
+		try (HStatelessSession hss = HStatelessSession.sessionDb(true);) {
 
 			// แบบที่ 1 // test ผ่านแล้ว
 			User us1 = (User) hss.getSession().get(User.class, 306);
@@ -244,8 +240,7 @@ public class TestHStatelessSession {
 	public static void testdeleteALL() throws Exception {
 		System.out.println("======testdeleteALL()");
 
-		try (HStatelessSession hss = HStatelessSession.sessionDb();) {
-			hss.begintrans();
+		try (HStatelessSession hss = HStatelessSession.sessionDb(true);) {
 
 			//แบบ hql
 			int eff = hss.getSession().createMutationQuery("delete from User").executeUpdate();

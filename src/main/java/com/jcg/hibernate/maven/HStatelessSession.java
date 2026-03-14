@@ -22,12 +22,16 @@ public class HStatelessSession implements AutoCloseable {
 	private Transaction tx;
 
 	/**
-	 * เชื่อมฐานข้อมูลตัวหลัก
+	 * เชื่อมฐานข้อมูล
+	 * @param beginTransaction เปิด transaction
 	 * @return
 	 */
-	public static HStatelessSession sessionDb() {
+	public static HStatelessSession sessionDb(boolean beginTransaction) {
 		HStatelessSession hStSession1 = new HStatelessSession();
 		hStSession1.setSessionDb();
+		if (beginTransaction) {
+			hStSession1.begintrans();
+		}
 		return hStSession1;
 	}
 
